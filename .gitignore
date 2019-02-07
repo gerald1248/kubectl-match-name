@@ -1,0 +1,6 @@
+**/kubectl-match_name
+**/kubectl-match_name.exe
+**/.DS_Store
+**/ignore/
+**/*.zip
+go.sum
