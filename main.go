@@ -12,7 +12,7 @@ func main() {
 	// usage
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr,
-			"Usage: %s [-kubeconfig=PATH] [-a] [-n NAMESPACE] REGEX\n",
+			"Usage: %s [-kubeconfig=PATH] [-a] [-k KIND] [-n NAMESPACE] REGEX\n",
 			filepath.Base(os.Args[0]))
 		flag.PrintDefaults()
 		os.Exit(0)
@@ -36,6 +36,7 @@ func main() {
 	allNamespaces := flag.Bool("A", false, "match in all namespaces")
 	namespace := flag.String("n", "", "namespace")
 	kind := flag.String("k", "pod", "match objects of kind")
+	count := flag.Bool("c", false, "count matching objects (implies -a)")
 
 	flag.Parse()
 
@@ -54,8 +55,20 @@ func main() {
 		os.Exit(2)
 	}
 
-	names := getObjects(*kubeconfig, *namespace, *kind, *allNamespaces)
+	names, err := getObjects(*kubeconfig, *namespace, *kind, *allNamespaces)
 
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error fetching objects: %s\n", err.Error())
+		os.Exit(3)
+	}
+
+	// output count
+	if *count == true {
+		fmt.Printf("%d", len(names))
+		return
+	}
+
+	// output name(s)
 	for i, name := range names {
 		if re.MatchString(name) {
 			if i > 0 {

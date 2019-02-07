@@ -1,4 +1,4 @@
-module github.com/gerald1248/kubectl-match
+module github.com/gerald1248/kubectl-match-name
 
 require (
 	github.com/ghodss/yaml v1.0.0
