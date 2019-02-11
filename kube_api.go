@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	"os"
 	"strings"
 )
 
@@ -38,7 +38,7 @@ func getObjects(kubeconfig string, namespace string, kind string, allNamespaces 
 	kind = strings.ToLower(kind)
 
 	switch kind {
-	case "cm", "configmap", "configmaps" :
+	case "cm", "configmap", "configmaps":
 		names, err = getConfigMaps(clientset.CoreV1(), namespace)
 	case "deploy", "deployment", "deployments":
 		names, err = getDeployments(clientset.AppsV1beta1(), namespace)
@@ -46,7 +46,7 @@ func getObjects(kubeconfig string, namespace string, kind string, allNamespaces 
 		names, err = getPods(clientset.CoreV1(), namespace)
 	case "secret", "secrets":
 		names, err = getSecrets(clientset.CoreV1(), namespace)
-	case "svc", "service":
+	case "svc", "service", "services":
 		names, err = getServices(clientset.CoreV1(), namespace)
 	default:
 		return nil, fmt.Errorf("unsupported object kind: %s", kind)

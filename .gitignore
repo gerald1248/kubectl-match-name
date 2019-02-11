@@ -2,5 +2,6 @@
 **/kubectl-match_name.exe
 **/.DS_Store
 **/ignore/
+**/release.txt
 **/*.zip
 go.sum

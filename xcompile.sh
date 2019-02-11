@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -f release.txt
+
 for OS in windows linux darwin; do
   mkdir -p ${OS}
   GOOS=${OS} GOARCH=amd64 go build -o ${OS}/kubectl-match_name
@@ -8,4 +10,5 @@ for OS in windows linux darwin; do
   fi
   zip kubectl-match_name-${OS}-amd64.zip ${OS}/kubectl-match_name*
   rm -rf ${OS}/
+  shasum -a 256 kubectl-match_name-${OS}-amd64.zip >>release.txt
 done

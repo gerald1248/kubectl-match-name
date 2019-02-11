@@ -8,4 +8,4 @@ RUN \
   go mod download && \
   go get && \
   go vet && \
-  go build -o kubectl-match-name .
+  go build -o kubectl-match_name .
