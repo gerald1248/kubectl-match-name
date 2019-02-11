@@ -12,7 +12,7 @@ func main() {
 	// usage
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr,
-			"Usage: %s [-kubeconfig=PATH] [-a] [-k KIND] [-n NAMESPACE] REGEX\n",
+			"Usage: %s [-kubeconfig=PATH] [-Aa] [-k KIND] [-n NAMESPACE] REGEX\n",
 			filepath.Base(os.Args[0]))
 		flag.PrintDefaults()
 		os.Exit(0)

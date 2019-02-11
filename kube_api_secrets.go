@@ -7,8 +7,8 @@ import (
 	"k8s.io/client-go/kubernetes/typed/core/v1"
 )
 
-func getConfigMaps(client v1.CoreV1Interface, namespace string) ([]string, error) {
-	objects, err := client.ConfigMaps(namespace).List(metav1.ListOptions{})
+func getSecrets(client v1.CoreV1Interface, namespace string) ([]string, error) {
+	objects, err := client.Secrets(namespace).List(metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf(err.Error())
 	}

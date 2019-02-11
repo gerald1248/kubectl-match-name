@@ -1,14 +1,16 @@
 package main
 
 import (
+	"fmt"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/kubernetes/typed/core/v1"
 )
 
-func getPods(clientset *kubernetes.Clientset, namespace string) []string {
-	objects, err := clientset.CoreV1().Pods(namespace).List(metav1.ListOptions{})
+func getPods(client v1.CoreV1Interface, namespace string) ([]string, error) {
+	objects, err := client.Pods(namespace).List(metav1.ListOptions{})
 	if err != nil {
-		panic(err.Error())
+		return nil, fmt.Errorf(err.Error())
 	}
 
 	var names []string
@@ -16,5 +18,5 @@ func getPods(clientset *kubernetes.Clientset, namespace string) []string {
 		names = append(names, object.ObjectMeta.Name)
 	}
 
-	return names
+	return names, nil
 }

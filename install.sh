@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cp kubectl-match-name /usr/local/bin/
+cp kubectl-match_name /usr/local/bin/
