@@ -1,13 +1,21 @@
 kubectl-match-name
 ==================
 
-Access pods quickly without using the clipboard or listing all pods first. Here's a typical use case:
+Access pods quickly without using the clipboard or listing all pods first. Here are some typical use cases:
 
 ```
 $ kubectl logs `kubectl match-name proxy` -f
+I0207 12:51:25.322909       1 server.go:444] Version: v1.10.0
+...
+$ kubectl match-name proxy
+kube-proxy-cvtm5
+$ kubectl match-name -k svc .
+default-http-backend
+$ kubectl match-name minikube
+etcd-minikube kube-addon-manager-minikube kube-apiserver-minikube kube-controller-manager-minikube kube-scheduler-minikube
 ```
 
-What have we gained? This line replaces two common approaches. In many cases we would use the clipboard or type in the hash component of the name:
+Let's take a closer look at the first example. What have we gained? This line replaces two common approaches. In many cases we would use the clipboard or type in the hash component of the name:
 
 ```
 $ kubectl get po | grep proxy
