@@ -69,15 +69,17 @@ func main() {
 	}
 
 	// output name(s)
-	for i, name := range names {
+  matches := 0
+	for _, name := range names {
 		if re.MatchString(name) {
-			if i > 0 {
+			if matches > 0 {
 				fmt.Printf(" ")
 			}
 			fmt.Printf(name)
 			if *allMatches == false {
 				break
 			}
+      matches++
 		}
 	}
 }
