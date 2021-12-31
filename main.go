@@ -69,7 +69,7 @@ func main() {
 	}
 
 	// output name(s)
-  matches := 0
+	matches := 0
 	for _, name := range names {
 		if re.MatchString(name) {
 			if matches > 0 {
@@ -79,7 +79,7 @@ func main() {
 			if *allMatches == false {
 				break
 			}
-      matches++
+			matches++
 		}
 	}
 }
